@@ -41,11 +41,20 @@ public final class DateOfBirthBuilder {
     }
 
     public DateOfBirth build() {
+
+        if (this.start == null || this.end == null) {
+            throw new NullPointerException();
+        }
+
+        if (this.start.compareTo(this.end) >= 0) {
+            throw new IllegalArgumentException("start >= end");
+        }
+
         int min = (int) start.toEpochDay();
         int max = (int) end.toEpochDay();
         long randomDay = min + random.nextInt(max - min);
         LocalDate date = LocalDate.ofEpochDay(randomDay);
-        return new SimpleDateOfBirth(date);
+        return new LocalDateDateOfBirth(date);
     }
 
     private DateOfBirthBuilder() {
@@ -53,11 +62,14 @@ public final class DateOfBirthBuilder {
 
     // ----------------------------------------------------------------------------------------------------------------
 
-    public static class SimpleDateOfBirth implements DateOfBirth {
+    public static class LocalDateDateOfBirth implements DateOfBirth {
 
         private final LocalDate date;
 
-        public SimpleDateOfBirth(LocalDate date) {
+        public LocalDateDateOfBirth(LocalDate date) {
+            if (date == null) {
+                throw new NullPointerException();
+            }
             this.date = date;
         }
 
