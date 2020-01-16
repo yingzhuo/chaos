@@ -21,11 +21,17 @@ import java.io.Serializable;
  */
 public interface Identity extends Serializable {
 
+    public static IdentityBuilder builder() {
+        return IdentityBuilder.instance();
+    }
+
     public String getValue();
 
     public int getCurrentAge();
 
     public Gender getGender();
+
+    public Area getArea();
 
     public default boolean isMale() {
         return getGender() == Gender.MALE;

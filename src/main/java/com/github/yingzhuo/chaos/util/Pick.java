@@ -10,6 +10,7 @@
 package com.github.yingzhuo.chaos.util;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -28,6 +29,14 @@ public final class Pick {
         } else {
             return collection.stream().skip(RANDOM.nextInt(collection.size())).findFirst().orElse(null);
         }
+    }
+
+    public static <K, V> K fromMapKeys(Map<K, V> map) {
+        return from(map.keySet());
+    }
+
+    public static <K, V> V fromMapValues(Map<K, V> map) {
+        return from(map.values());
     }
 
     private Pick() {

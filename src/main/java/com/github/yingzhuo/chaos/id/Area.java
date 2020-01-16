@@ -9,6 +9,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.github.yingzhuo.chaos.id;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -586,6 +587,7 @@ public enum Area {
             E.put("阿拉善右旗", 152922),
             E.put("额济纳旗", 152923)
     ),
+
     辽宁省(
             // 沈阳市
             E.put("和平区", 210102),
@@ -1570,14 +1572,17 @@ public enum Area {
             E.put("德兴市", 361181)
     );
 
-    private Area(E... entries) {
-        this.map = new HashMap<>();
+    Area(E... entries) {
         for (Map.Entry<String, Integer> entry : entries) {
-            this.map.put(entry.getKey(), entry.getValue());
+            this.areaDict.put(entry.getKey(), entry.getValue());
         }
     }
 
-    private Map<String, Integer> map;
+    private final Map<String, Integer> areaDict = new HashMap<>();
+
+    public Map<String, Integer> getAreaDict() {
+        return Collections.unmodifiableMap(areaDict);
+    }
 
     private static class E implements Map.Entry<String, Integer> {
 
