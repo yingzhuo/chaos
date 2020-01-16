@@ -11,6 +11,7 @@ package com.github.yingzhuo.chaos.dob;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -19,6 +20,10 @@ import java.util.Date;
  */
 public interface DateOfBirth extends Serializable, Comparable<DateOfBirth> {
 
+    public static DateOfBirthBuilder builder() {
+        return DateOfBirthBuilder.newInstance();
+    }
+
     public boolean isLeapYear();
 
     public Date asDate();
@@ -26,6 +31,8 @@ public interface DateOfBirth extends Serializable, Comparable<DateOfBirth> {
     public LocalDate asLocalDate();
 
     public long asTime();
+
+    public Calendar asCalendar();
 
     public String toString(String pattern);
 

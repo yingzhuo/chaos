@@ -14,6 +14,8 @@ import com.github.yingzhuo.chaos.Gender;
 import java.io.Serializable;
 
 /**
+ * 身份证号码
+ *
  * @author 应卓
  * @since 0.0.1
  */
@@ -24,5 +26,13 @@ public interface Identity extends Serializable {
     public int getCurrentAge();
 
     public Gender getGender();
+
+    public default boolean isMale() {
+        return getGender() == Gender.MALE;
+    }
+
+    public default boolean isFemale() {
+        return getGender() == Gender.FEMALE;
+    }
 
 }

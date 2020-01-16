@@ -17,6 +17,10 @@ import java.io.Serializable;
  */
 public interface Name extends Serializable, Comparable<Name> {
 
+    public static NameBuilder builder() {
+        return NameBuilder.instance();
+    }
+
     public String getFamilyName();
 
     public String getGivenName();

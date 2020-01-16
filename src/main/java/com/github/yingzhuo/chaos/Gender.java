@@ -10,9 +10,21 @@
 package com.github.yingzhuo.chaos;
 
 /**
+ * 性别
+ *
  * @author 应卓
  * @since 0.0.1
  */
 public enum Gender {
-    MALE, FEMALE
+
+    /**
+     * 男性
+     */
+    MALE,
+
+    /**
+     * 女性
+     */
+    FEMALE
+
 }

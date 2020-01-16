@@ -12,6 +12,7 @@ package com.github.yingzhuo.chaos.dob;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -42,8 +43,12 @@ public final class DateOfBirthBuilder {
 
     public DateOfBirth build() {
 
-        if (this.start == null || this.end == null) {
-            throw new NullPointerException();
+        if (this.start == null) {
+            this.start = LocalDate.of(1970, 1, 1);
+        }
+
+        if (this.end == null) {
+            this.end = LocalDate.now();
         }
 
         if (this.start.compareTo(this.end) >= 0) {
@@ -92,6 +97,13 @@ public final class DateOfBirthBuilder {
         @Override
         public long asTime() {
             return asDate().getTime();
+        }
+
+        @Override
+        public Calendar asCalendar() {
+            final Calendar calendar = Calendar.getInstance();
+            calendar.setTime(asDate());
+            return calendar;
         }
 
         @Override
