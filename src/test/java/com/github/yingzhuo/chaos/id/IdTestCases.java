@@ -13,6 +13,9 @@ public class IdTestCases {
                 .gender(Gender.MALE, Gender.FEMALE)
                 .build();
         System.out.println(id);
+        System.out.println(id.getName());
+        System.out.println(id.getArea());
+        System.out.println(id.getCurrentAge());
     }
 
 }

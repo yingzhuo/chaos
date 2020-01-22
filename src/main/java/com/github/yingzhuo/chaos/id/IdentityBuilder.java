@@ -10,6 +10,9 @@
 package com.github.yingzhuo.chaos.id;
 
 import com.github.yingzhuo.chaos.Gender;
+import com.github.yingzhuo.chaos.dob.DateOfBirth;
+import com.github.yingzhuo.chaos.dob.DateOfBirthBuilder;
+import com.github.yingzhuo.chaos.name.Name;
 import com.github.yingzhuo.chaos.util.Pick;
 
 import java.time.LocalDate;
@@ -77,11 +80,14 @@ public final class IdentityBuilder {
         sb.append(dob.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
         sb.append(serial);
 
+        // 姓名
+        final Name name = Name.builder().gender(this.genders).build();
+
         // 验证码
         final char checkCode = genCheckCode(sb);
         sb.append(checkCode);
 
-        return new SimpleIdentity(sb.toString(), gender, dob, pickedArea);
+        return new SimpleIdentity(sb.toString(), gender, dob, pickedArea, name);
     }
 
     private String genSerial(Gender gender) {
@@ -140,12 +146,14 @@ public final class IdentityBuilder {
         private final Gender gender;
         private final LocalDate dob;
         private final Area area;
+        private final Name name;
 
-        public SimpleIdentity(String stringValue, Gender gender, LocalDate dob, Area area) {
+        public SimpleIdentity(String stringValue, Gender gender, LocalDate dob, Area area, Name name) {
             this.stringValue = stringValue;
             this.gender = gender;
             this.dob = dob;
             this.area = area;
+            this.name = name;
         }
 
         @Override
@@ -166,6 +174,16 @@ public final class IdentityBuilder {
         @Override
         public Area getArea() {
             return this.area;
+        }
+
+        @Override
+        public DateOfBirth getDob() {
+            return new DateOfBirthBuilder.LocalDateDateOfBirth(this.dob);
+        }
+
+        @Override
+        public Name getName() {
+            return this.name;
         }
 
         @Override

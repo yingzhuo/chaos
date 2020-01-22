@@ -10,6 +10,8 @@
 package com.github.yingzhuo.chaos.id;
 
 import com.github.yingzhuo.chaos.Gender;
+import com.github.yingzhuo.chaos.dob.DateOfBirth;
+import com.github.yingzhuo.chaos.name.Name;
 
 import java.io.Serializable;
 
@@ -24,6 +26,10 @@ public interface Identity extends Serializable {
     public static IdentityBuilder builder() {
         return IdentityBuilder.instance();
     }
+
+    public Name getName();
+
+    public DateOfBirth getDob();
 
     public String getValue();
 

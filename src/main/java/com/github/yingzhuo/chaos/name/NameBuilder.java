@@ -34,6 +34,11 @@ public final class NameBuilder {
         return this;
     }
 
+    public NameBuilder gender(Set<Gender> genders) {
+        this.genders.addAll(genders);
+        return this;
+    }
+
     public Name build() {
 
         if (genders.isEmpty()) {
